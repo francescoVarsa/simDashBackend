@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 	"net"
-	pb "simDashBackend/datafiles"
+	pb "simDashBackend/proto"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -14,7 +14,9 @@ const (
 	port = ":50051"
 )
 
-type server struct{}
+type server struct {
+	pb.UnimplementedMoneyTransactionServer
+}
 
 func (s *server) MakeTransaction(ctx context.Context, in *pb.TransactionRequest) (*pb.TransactionResponse, error) {
 	log.Printf("Got Request for money Transfer...")
